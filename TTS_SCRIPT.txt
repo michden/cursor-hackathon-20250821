@@ -1,0 +1,13 @@
+Welcome to ElbeClean, the community-driven platform that's making Hamburg great again. Our mission is simple: keep Hamburg's beautiful waterways clean through the power of community action.
+
+Built for Hamburg's diverse community, our app supports three languages: English, German, and Polish. Watch as we instantly translate the entire interface for maximum accessibility.
+
+Users can easily report pollution with our intuitive interface, browse and join community cleanup events, and track their environmental impact through our gamified leaderboard system.
+
+Now let me activate our presentation demo mode to show you the real-time community engagement that makes ElbeClean special.
+
+In demo mode, you can see live notifications as community members report pollution, join events, and earn achievements. This simulates the real-time engagement we expect from Hamburg's environmental community.
+
+Our impact dashboard shows real environmental results. In demo mode, you can see how these numbers could grow with wider adoption. This isn't just an app - it's a movement to make Hamburg's waterways the cleanest in Europe.
+
+ElbeClean: where technology meets environmental action. Ready to make Hamburg great again, one cleanup at a time.
