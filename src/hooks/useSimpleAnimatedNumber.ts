@@ -74,33 +74,55 @@ export const useSimpleAnimatedNumber = (
     const element = elementRef.current;
     if (!element) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated.current) {
-            setIsVisible(true);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    let observer: IntersectionObserver | null = null;
 
-    // Check if already visible on mount
-    const rect = element.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0 && !hasAnimated.current) {
-      setIsVisible(true);
-    } else {
-      observer.observe(element);
-    }
+    // Small delay to ensure DOM is fully ready
+    const checkVisibility = () => {
+      const rect = element.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (isInViewport && !hasAnimated.current) {
+        setIsVisible(true);
+      } else {
+        observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !hasAnimated.current) {
+                setIsVisible(true);
+                if (observer) {
+                  observer.unobserve(entry.target);
+                }
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+        observer.observe(element);
+      }
+    };
+
+    // Use requestAnimationFrame to ensure DOM is ready
+    const frameId = requestAnimationFrame(checkVisibility);
 
     return () => {
-      observer.disconnect();
+      cancelAnimationFrame(frameId);
+      if (observer) {
+        observer.disconnect();
+      }
     };
   }, []);
 
   const ref = (element: HTMLElement | null) => {
-    if (element) {
+    if (element && element !== elementRef.current) {
       elementRef.current = element;
+      
+      // Check visibility immediately when ref is set
+      const rect = element.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (isInViewport && !hasAnimated.current) {
+        setIsVisible(true);
+      }
     }
   };
 

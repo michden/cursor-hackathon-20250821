@@ -1,26 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Sparkles, Users, MapPin } from 'lucide-react';
-import { useAnimatedNumber } from '../hooks/useAnimatedNumber';
+import { useSimpleAnimatedNumber } from '../hooks/useSimpleAnimatedNumber';
 
 const Hero: React.FC = () => {
   // Animated statistics - start on mount since Hero is visible immediately
-  const activeSpots = useAnimatedNumber(48, { 
+  const activeSpots = useSimpleAnimatedNumber(48, { 
     duration: 2000, 
-    delay: 500,
-    startOnMount: true 
+    delay: 500
   });
-  const volunteers = useAnimatedNumber(234, { 
+  const volunteers = useSimpleAnimatedNumber(234, { 
     duration: 2000, 
-    delay: 700,
-    startOnMount: true 
+    delay: 700
   });
-  const wasteCollected = useAnimatedNumber(3.4, { 
+  const wasteCollected = useSimpleAnimatedNumber(3.4, { 
     duration: 2000, 
     delay: 900, 
     decimals: 1,
-    suffix: 't',
-    startOnMount: true 
+    suffix: 't'
   });
 
   return (
