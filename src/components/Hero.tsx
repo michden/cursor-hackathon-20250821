@@ -1,8 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Sparkles, Users, MapPin } from 'lucide-react';
+import { useAnimatedNumber } from '../hooks/useAnimatedNumber';
 
 const Hero: React.FC = () => {
+  // Animated statistics
+  const activeSpots = useAnimatedNumber(48, { duration: 2000, delay: 500 });
+  const volunteers = useAnimatedNumber(234, { duration: 2000, delay: 700 });
+  const wasteCollected = useAnimatedNumber(3.4, { 
+    duration: 2000, 
+    delay: 900, 
+    decimals: 1,
+    suffix: 't' 
+  });
+
   return (
     <div className="relative bg-gradient-to-br from-elbe-blue via-blue-600 to-eco-green dark:from-gray-800 dark:via-blue-900 dark:to-gray-900 overflow-hidden transition-all duration-500">
       <div className="absolute inset-0 bg-black opacity-10 dark:opacity-30"></div>
@@ -74,17 +85,23 @@ const Hero: React.FC = () => {
           >
             <div className="bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-40 backdrop-blur-sm rounded-lg p-4">
               <MapPin className="h-8 w-8 mx-auto mb-2 text-yellow-300 dark:text-yellow-400" />
-              <div className="text-3xl font-bold">48</div>
+              <div className="text-3xl font-bold" ref={activeSpots.ref}>
+                {activeSpots.displayValue}
+              </div>
               <div className="text-sm">Active Spots</div>
             </div>
             <div className="bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-40 backdrop-blur-sm rounded-lg p-4">
               <Users className="h-8 w-8 mx-auto mb-2 text-yellow-300 dark:text-yellow-400" />
-              <div className="text-3xl font-bold">234</div>
+              <div className="text-3xl font-bold" ref={volunteers.ref}>
+                {volunteers.displayValue}
+              </div>
               <div className="text-sm">Volunteers</div>
             </div>
             <div className="bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-40 backdrop-blur-sm rounded-lg p-4">
               <Sparkles className="h-8 w-8 mx-auto mb-2 text-yellow-300 dark:text-yellow-400" />
-              <div className="text-3xl font-bold">3.4t</div>
+              <div className="text-3xl font-bold" ref={wasteCollected.ref}>
+                {wasteCollected.displayValue}
+              </div>
               <div className="text-sm">Waste Collected</div>
             </div>
           </motion.div>

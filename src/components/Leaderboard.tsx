@@ -2,6 +2,7 @@ import React from 'react';
 import { Trophy, Medal, Award, TrendingUp } from 'lucide-react';
 import { Volunteer } from '../types';
 import { motion } from 'framer-motion';
+import { useAnimatedNumber } from '../hooks/useAnimatedNumber';
 
 interface LeaderboardProps {
   volunteers: Volunteer[];
@@ -36,6 +37,11 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ volunteers, showAll = false }
       <div className="space-y-3">
         {displayVolunteers.map((volunteer, index) => {
           const rank = index + 1;
+          const animatedPoints = useAnimatedNumber(volunteer.points, {
+            duration: 2000,
+            delay: 300 + (index * 150),
+          });
+          
           return (
             <motion.div
               key={volunteer.id}
@@ -61,7 +67,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ volunteers, showAll = false }
                 </div>
                 
                 <div className="text-right">
-                  <div className="text-2xl font-bold gradient-text">{volunteer.points}</div>
+                  <div className="text-2xl font-bold gradient-text" ref={animatedPoints.ref}>
+                    {animatedPoints.displayValue}
+                  </div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">points</div>
                 </div>
               </div>

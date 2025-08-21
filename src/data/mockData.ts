@@ -153,7 +153,7 @@ export const mockVolunteers: Volunteer[] = [
     points: 1250,
     eventsJoined: 12,
     wasteCollected: 156,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Anna',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Anna&mood=happy&eyes=happy&mouth=smile',
     badges: [
       {
         id: 'b1',
@@ -179,7 +179,7 @@ export const mockVolunteers: Volunteer[] = [
     points: 890,
     eventsJoined: 8,
     wasteCollected: 98,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Max',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Max&mood=happy&eyes=happy&mouth=smile',
     badges: [
       {
         id: 'b3',
@@ -198,7 +198,7 @@ export const mockVolunteers: Volunteer[] = [
     points: 750,
     eventsJoined: 6,
     wasteCollected: 67,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa&mood=happy&eyes=happy&mouth=smile',
     badges: [],
     joinedAt: new Date('2024-10-01')
   },
@@ -209,7 +209,7 @@ export const mockVolunteers: Volunteer[] = [
     points: 620,
     eventsJoined: 5,
     wasteCollected: 45,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tom',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tom&mood=happy&eyes=happy&mouth=smile',
     badges: [],
     joinedAt: new Date('2024-11-01')
   },
@@ -220,7 +220,7 @@ export const mockVolunteers: Volunteer[] = [
     points: 540,
     eventsJoined: 4,
     wasteCollected: 38,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah&mood=happy&eyes=happy&mouth=smile',
     badges: [],
     joinedAt: new Date('2024-11-15')
   }
