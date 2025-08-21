@@ -62,8 +62,8 @@ const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ stats, detailed = fal
 
   if (!detailed) {
     return (
-      <div className="bg-white rounded-xl shadow-lg p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Community Impact</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-colors duration-200">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Community Impact</h2>
         <div className="grid grid-cols-2 gap-4">
           {impactMetrics.slice(0, 4).map((metric, index) => {
             const Icon = metric.icon;
@@ -78,8 +78,8 @@ const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ stats, detailed = fal
                 <div className={`inline-flex p-3 rounded-full ${metric.bgColor} mb-2`}>
                   <Icon className={`h-6 w-6 ${metric.color}`} />
                 </div>
-                <div className="text-2xl font-bold text-gray-900">{metric.value}</div>
-                <div className="text-sm text-gray-600">{metric.label}</div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">{metric.value}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">{metric.label}</div>
               </motion.div>
             );
           })}
@@ -99,7 +99,7 @@ const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ stats, detailed = fal
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className={`p-3 rounded-lg ${metric.bgColor}`}>
@@ -109,10 +109,10 @@ const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ stats, detailed = fal
                   +12%
                 </span>
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">{metric.value}</div>
-              <div className="text-sm font-medium text-gray-700 mb-2">{metric.label}</div>
-              <div className="text-xs text-gray-500">{metric.subtext}</div>
-              <div className="mt-4 h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{metric.value}</div>
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{metric.label}</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">{metric.subtext}</div>
+              <div className="mt-4 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
                 <motion.div
                   className={`h-full ${metric.bgColor}`}
                   initial={{ width: 0 }}
@@ -126,15 +126,15 @@ const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ stats, detailed = fal
       </div>
 
       {/* Additional detailed stats */}
-      <div className="bg-white rounded-xl shadow-lg p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">Monthly Progress</h3>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-colors duration-200">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Monthly Progress</h3>
         <div className="space-y-4">
           <div>
             <div className="flex justify-between text-sm mb-1">
-              <span className="text-gray-600">Cleanup Goal</span>
-              <span className="font-semibold">82% Complete</span>
+              <span className="text-gray-600 dark:text-gray-400">Cleanup Goal</span>
+              <span className="font-semibold dark:text-white">82% Complete</span>
             </div>
-            <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-gradient-to-r from-elbe-blue to-eco-green"
                 initial={{ width: 0 }}
@@ -146,10 +146,10 @@ const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ stats, detailed = fal
           
           <div>
             <div className="flex justify-between text-sm mb-1">
-              <span className="text-gray-600">Volunteer Target</span>
-              <span className="font-semibold">117% Achieved</span>
+              <span className="text-gray-600 dark:text-gray-400">Volunteer Target</span>
+              <span className="font-semibold dark:text-white">117% Achieved</span>
             </div>
-            <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
                 initial={{ width: 0 }}
@@ -161,10 +161,10 @@ const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ stats, detailed = fal
 
           <div>
             <div className="flex justify-between text-sm mb-1">
-              <span className="text-gray-600">Area Coverage</span>
-              <span className="font-semibold">65% Covered</span>
+              <span className="text-gray-600 dark:text-gray-400">Area Coverage</span>
+              <span className="font-semibold dark:text-white">65% Covered</span>
             </div>
-            <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-gradient-to-r from-yellow-500 to-orange-500"
                 initial={{ width: 0 }}
@@ -175,11 +175,11 @@ const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ stats, detailed = fal
           </div>
         </div>
 
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+        <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-blue-900">Environmental Impact</p>
-              <p className="text-xs text-blue-700 mt-1">
+              <p className="text-sm font-medium text-blue-900 dark:text-blue-300">Environmental Impact</p>
+              <p className="text-xs text-blue-700 dark:text-blue-400 mt-1">
                 Your efforts have saved {stats.co2Saved}kg of CO₂ emissions this month
               </p>
             </div>

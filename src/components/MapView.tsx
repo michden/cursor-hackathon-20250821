@@ -120,25 +120,25 @@ const MapView: React.FC<MapViewProps> = ({ pollutionSpots }) => {
   return (
     <div className="relative">
       <div className="container mx-auto px-4 py-8">
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="p-6 bg-gradient-to-r from-elbe-blue to-blue-600 text-white">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-colors duration-200">
+          <div className="p-6 bg-gradient-to-r from-elbe-blue to-blue-600 dark:from-blue-800 dark:to-blue-900 text-white">
             <h2 className="text-2xl font-bold mb-2">Pollution Map</h2>
             <p className="text-blue-100">Click on markers to see details and vote for cleanup priority</p>
           </div>
 
-          <div className="p-4 bg-gray-50 border-b">
+          <div className="p-4 bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700">
             <div className="flex flex-wrap gap-4 justify-center">
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium">Reported ({stats.reported})</span>
+                <span className="text-sm font-medium dark:text-gray-300">Reported ({stats.reported})</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 bg-yellow-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium">Being Cleaned ({stats.cleaning})</span>
+                <span className="text-sm font-medium dark:text-gray-300">Being Cleaned ({stats.cleaning})</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-                <span className="text-sm font-medium">Cleaned ({stats.cleaned})</span>
+                <span className="text-sm font-medium dark:text-gray-300">Cleaned ({stats.cleaned})</span>
               </div>
             </div>
           </div>

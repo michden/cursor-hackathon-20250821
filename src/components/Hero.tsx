@@ -4,13 +4,13 @@ import { ArrowDown, Sparkles, Users, MapPin } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative bg-gradient-to-br from-elbe-blue via-blue-600 to-eco-green overflow-hidden">
-      <div className="absolute inset-0 bg-black opacity-10"></div>
+    <div className="relative bg-gradient-to-br from-elbe-blue via-blue-600 to-eco-green dark:from-gray-800 dark:via-blue-900 dark:to-gray-900 overflow-hidden transition-all duration-500">
+      <div className="absolute inset-0 bg-black opacity-10 dark:opacity-30"></div>
       
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -top-10 -left-10 w-40 h-40 bg-white opacity-10 rounded-full"
+          className="absolute -top-10 -left-10 w-40 h-40 bg-white dark:bg-blue-400 opacity-10 dark:opacity-5 rounded-full"
           animate={{
             x: [0, 30, 0],
             y: [0, -20, 0],
@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
           }}
         />
         <motion.div
-          className="absolute top-20 right-10 w-60 h-60 bg-white opacity-10 rounded-full"
+          className="absolute top-20 right-10 w-60 h-60 bg-white dark:bg-blue-400 opacity-10 dark:opacity-5 rounded-full"
           animate={{
             x: [0, -40, 0],
             y: [0, 30, 0],
@@ -58,10 +58,10 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-wrap justify-center gap-4 mb-12"
           >
-            <button className="bg-white text-elbe-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-50 transition-colors duration-200 shadow-xl">
+            <button className="bg-white dark:bg-gray-800 text-elbe-blue dark:text-blue-400 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 shadow-xl">
               Report Pollution
             </button>
-            <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-elbe-blue transition-all duration-200">
+            <button className="bg-transparent border-2 border-white dark:border-gray-400 text-white dark:text-gray-200 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white dark:hover:bg-gray-800 hover:text-elbe-blue dark:hover:text-blue-400 transition-all duration-200">
               Join Event
             </button>
           </motion.div>
@@ -72,18 +72,18 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto"
           >
-            <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg p-4">
-              <MapPin className="h-8 w-8 mx-auto mb-2 text-yellow-300" />
+            <div className="bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-40 backdrop-blur-sm rounded-lg p-4">
+              <MapPin className="h-8 w-8 mx-auto mb-2 text-yellow-300 dark:text-yellow-400" />
               <div className="text-3xl font-bold">48</div>
               <div className="text-sm">Active Spots</div>
             </div>
-            <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg p-4">
-              <Users className="h-8 w-8 mx-auto mb-2 text-yellow-300" />
+            <div className="bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-40 backdrop-blur-sm rounded-lg p-4">
+              <Users className="h-8 w-8 mx-auto mb-2 text-yellow-300 dark:text-yellow-400" />
               <div className="text-3xl font-bold">234</div>
               <div className="text-sm">Volunteers</div>
             </div>
-            <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg p-4">
-              <Sparkles className="h-8 w-8 mx-auto mb-2 text-yellow-300" />
+            <div className="bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-40 backdrop-blur-sm rounded-lg p-4">
+              <Sparkles className="h-8 w-8 mx-auto mb-2 text-yellow-300 dark:text-yellow-400" />
               <div className="text-3xl font-bold">3.4t</div>
               <div className="text-sm">Waste Collected</div>
             </div>

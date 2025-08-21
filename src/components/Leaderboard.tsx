@@ -20,16 +20,16 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ volunteers, showAll = false }
   };
 
   const getRankStyle = (rank: number) => {
-    if (rank === 1) return 'bg-gradient-to-r from-yellow-50 to-yellow-100 border-yellow-300';
-    if (rank === 2) return 'bg-gradient-to-r from-gray-50 to-gray-100 border-gray-300';
-    if (rank === 3) return 'bg-gradient-to-r from-orange-50 to-orange-100 border-orange-300';
-    return 'bg-white border-gray-200';
+    if (rank === 1) return 'bg-gradient-to-r from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 border-yellow-300 dark:border-yellow-700';
+    if (rank === 2) return 'bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 border-gray-300 dark:border-gray-600';
+    if (rank === 3) return 'bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 border-orange-300 dark:border-orange-700';
+    return 'bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600';
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-colors duration-200">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Top Eco Warriors</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Top Eco Warriors</h2>
         <Trophy className="h-8 w-8 text-yellow-500" />
       </div>
 
@@ -55,19 +55,19 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ volunteers, showAll = false }
                     className="h-12 w-12 rounded-full border-2 border-white shadow-sm"
                   />
                   <div>
-                    <div className="font-semibold text-gray-900">{volunteer.name}</div>
-                    <div className="text-sm text-gray-600">{volunteer.district}</div>
+                    <div className="font-semibold text-gray-900 dark:text-white">{volunteer.name}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{volunteer.district}</div>
                   </div>
                 </div>
                 
                 <div className="text-right">
                   <div className="text-2xl font-bold gradient-text">{volunteer.points}</div>
-                  <div className="text-xs text-gray-500">points</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">points</div>
                 </div>
               </div>
 
-              <div className="mt-3 pt-3 border-t border-gray-200 flex items-center justify-between text-sm">
-                <div className="flex items-center space-x-4 text-gray-600">
+              <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600 flex items-center justify-between text-sm">
+                <div className="flex items-center space-x-4 text-gray-600 dark:text-gray-400">
                   <span>📅 {volunteer.eventsJoined} events</span>
                   <span>♻️ {volunteer.wasteCollected}kg</span>
                 </div>
@@ -97,7 +97,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ volunteers, showAll = false }
 
       {!showAll && volunteers.length > 5 && (
         <div className="mt-4 text-center">
-          <button className="text-elbe-blue hover:text-blue-700 font-medium text-sm">
+          <button className="text-elbe-blue dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm">
             View all {volunteers.length} volunteers →
           </button>
         </div>

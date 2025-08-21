@@ -38,7 +38,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       <Navbar activeView={activeView} setActiveView={setActiveView} />
       
       <main>
@@ -70,12 +70,12 @@ function App() {
         {activeView === 'impact' && (
           <div className="container mx-auto px-4 py-12">
             <div className="mb-8">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Impact</h1>
-              <p className="text-lg text-gray-600">Together we're making Hamburg cleaner, one spot at a time</p>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Impact</h1>
+              <p className="text-lg text-gray-600 dark:text-gray-400">Together we're making Hamburg cleaner, one spot at a time</p>
             </div>
             <ImpactDashboard stats={mockImpactStats} detailed={true} />
             <div className="mt-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Top Contributors</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Top Contributors</h2>
               <Leaderboard volunteers={mockVolunteers} showAll={true} />
             </div>
           </div>

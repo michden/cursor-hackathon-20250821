@@ -69,8 +69,8 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-        <div className="p-6 bg-gradient-to-r from-elbe-blue to-blue-600 text-white">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-colors duration-200">
+        <div className="p-6 bg-gradient-to-r from-elbe-blue to-blue-600 dark:from-blue-800 dark:to-blue-900 text-white">
           <h2 className="text-3xl font-bold mb-2">Report Pollution</h2>
           <p className="text-blue-100">Help us identify areas that need cleaning</p>
         </div>
@@ -78,7 +78,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Pollution Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Pollution Type
             </label>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -89,8 +89,8 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
                   onClick={() => setFormData({ ...formData, type: type as any })}
                   className={`p-3 rounded-lg border-2 transition-all ${
                     formData.type === type
-                      ? 'border-elbe-blue bg-blue-50 text-elbe-blue'
-                      : 'border-gray-300 hover:border-gray-400'
+                      ? 'border-elbe-blue dark:border-blue-600 bg-blue-50 dark:bg-blue-900/30 text-elbe-blue dark:text-blue-400'
+                      : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 dark:text-gray-300'
                   }`}
                 >
                   <span className="block text-2xl mb-1">
@@ -107,7 +107,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
 
           {/* Severity */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Severity Level
             </label>
             <div className="grid grid-cols-3 gap-3">
@@ -120,8 +120,8 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
                     formData.severity === level
                       ? level === 'high' ? 'border-red-500 bg-red-50 text-red-600' :
                         level === 'medium' ? 'border-yellow-500 bg-yellow-50 text-yellow-600' :
-                        'border-green-500 bg-green-50 text-green-600'
-                      : 'border-gray-300 hover:border-gray-400'
+                        'border-green-500 dark:border-green-600 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+                      : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 dark:text-gray-300'
                   }`}
                 >
                   <AlertTriangle className={`h-5 w-5 mx-auto mb-1 ${
@@ -140,7 +140,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
           {/* Location */}
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 <MapPin className="inline h-4 w-4 mr-1" />
                 Street Address
               </label>
@@ -149,19 +149,19 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
                 required
                 value={formData.address}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-elbe-blue focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-elbe-blue focus:border-transparent"
                 placeholder="e.g., Landungsbrücken 1"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 District
               </label>
               <select
                 required
                 value={formData.district}
                 onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-elbe-blue focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-elbe-blue focus:border-transparent"
               >
                 <option value="">Select a district</option>
                 {hamburgDistricts.map(district => (
@@ -173,7 +173,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Description
             </label>
             <textarea
@@ -188,11 +188,11 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
 
           {/* Image Upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               <Camera className="inline h-4 w-4 mr-1" />
               Photo (Optional)
             </label>
-            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors">
+            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg hover:border-gray-400 dark:hover:border-gray-500 transition-colors">
               <div className="space-y-1 text-center">
                 {imagePreview ? (
                   <div className="relative">
@@ -210,9 +210,9 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
                   </div>
                 ) : (
                   <>
-                    <Camera className="mx-auto h-12 w-12 text-gray-400" />
-                    <div className="flex text-sm text-gray-600">
-                      <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-elbe-blue hover:text-blue-700">
+                    <Camera className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" />
+                    <div className="flex text-sm text-gray-600 dark:text-gray-400">
+                      <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-elbe-blue dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">
                         <span>Upload a photo</span>
                         <input
                           id="file-upload"
@@ -225,7 +225,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
                       </label>
                       <p className="pl-1">or drag and drop</p>
                     </div>
-                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF up to 10MB</p>
                   </>
                 )}
               </div>
@@ -234,7 +234,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit }) => {
 
           {/* Reporter Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Your Name (Optional)
             </label>
             <input
