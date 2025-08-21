@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 interface UseAnimatedNumberOptions {
   duration?: number;
@@ -9,6 +9,7 @@ interface UseAnimatedNumberOptions {
   suffix?: string;
   separator?: string;
   easing?: (t: number) => number;
+  startOnMount?: boolean; // Add option to start immediately on mount
 }
 
 export const useAnimatedNumber = (
@@ -24,14 +25,16 @@ export const useAnimatedNumber = (
     suffix = '',
     separator = ',',
     easing = easeOutExpo,
+    startOnMount = false, // Default to false for backward compatibility
   } = options;
 
   const [displayValue, setDisplayValue] = useState<string>(`${prefix}${startFrom}${suffix}`);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const animationRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
   const elementRef = useRef<HTMLElement | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Easing function for smooth animation
   function easeOutExpo(t: number): number {
@@ -39,7 +42,7 @@ export const useAnimatedNumber = (
   }
 
   // Format number with separator
-  const formatNumber = (num: number): string => {
+  const formatNumber = useCallback((num: number): string => {
     const fixedNum = num.toFixed(decimals);
     if (separator) {
       const parts = fixedNum.split('.');
@@ -47,10 +50,10 @@ export const useAnimatedNumber = (
       return parts.join('.');
     }
     return fixedNum;
-  };
+  }, [decimals, separator]);
 
-  // Animation function
-  const animate = () => {
+  // Animation loop
+  const animationLoop = useCallback(() => {
     if (!startTimeRef.current) {
       startTimeRef.current = performance.now();
     }
@@ -65,37 +68,60 @@ export const useAnimatedNumber = (
     setDisplayValue(`${prefix}${formatNumber(currentValue)}${suffix}`);
 
     if (progress < 1) {
-      animationRef.current = requestAnimationFrame(animate);
-    } else {
-      setHasAnimated(true);
+      animationRef.current = requestAnimationFrame(animationLoop);
     }
-  };
+  }, [duration, startFrom, endValue, prefix, suffix, formatNumber, easing]);
 
-  // Start animation when element is in viewport
-  const startAnimation = () => {
-    if (!hasAnimated) {
-      if (delay > 0) {
-        setTimeout(() => {
-          animate();
-        }, delay);
+  // Start animation
+  const startAnimation = useCallback(() => {
+    if (hasStarted) return;
+    
+    setHasStarted(true);
+    startTimeRef.current = null;
+    
+    if (delay > 0) {
+      timeoutRef.current = setTimeout(() => {
+        animationLoop();
+      }, delay);
+    } else {
+      animationLoop();
+    }
+  }, [hasStarted, delay, animationLoop]);
+
+  // Start on mount if specified
+  useEffect(() => {
+    if (startOnMount && !hasStarted) {
+      startAnimation();
+    }
+  }, [startOnMount, startAnimation, hasStarted]);
+
+  // Set up intersection observer for scroll-triggered animations
+  useEffect(() => {
+    if (startOnMount) return; // Skip observer if starting on mount
+    
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasStarted) {
+          startAnimation();
+        }
+      });
+    };
+
+    observerRef.current = new IntersectionObserver(handleIntersection, {
+      threshold: 0.1,
+    });
+
+    // Check if element is already in view when observer is created
+    if (elementRef.current) {
+      const rect = elementRef.current.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (isInViewport) {
+        startAnimation();
       } else {
-        animate();
+        observerRef.current.observe(elementRef.current);
       }
     }
-  };
-
-  // Set up intersection observer
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            startAnimation();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
 
     return () => {
       if (observerRef.current) {
@@ -104,21 +130,35 @@ export const useAnimatedNumber = (
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     };
-  }, [hasAnimated, endValue]);
+  }, [startOnMount, startAnimation, hasStarted]);
 
-  // Function to bind to element
-  const ref = (element: HTMLElement | null) => {
-    if (element && observerRef.current) {
+  // Ref callback
+  const ref = useCallback((element: HTMLElement | null) => {
+    if (element) {
       elementRef.current = element;
-      observerRef.current.observe(element);
+      
+      // If not starting on mount, check if element is in view
+      if (!startOnMount && !hasStarted && observerRef.current) {
+        const rect = element.getBoundingClientRect();
+        const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isInViewport) {
+          startAnimation();
+        } else {
+          observerRef.current.observe(element);
+        }
+      }
     }
-  };
+  }, [startOnMount, hasStarted, startAnimation]);
 
   return {
     displayValue,
     ref,
-    hasAnimated,
+    hasAnimated: hasStarted,
   };
 };
 
