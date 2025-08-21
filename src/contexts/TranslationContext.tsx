@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Language = 'en' | 'de';
+type Language = 'en' | 'de' | 'pl';
 
 interface TranslationContextType {
   language: Language;
@@ -287,6 +287,138 @@ const translations = {
     'common.previous': 'Zurück',
     'common.kg': 'kg',
     'common.tons': 't',
+  },
+  pl: {
+    // Navigation
+    'nav.map': 'Mapa',
+    'nav.report': 'Zgłoś',
+    'nav.events': 'Wydarzenia',
+    'nav.impact': 'Wpływ',
+    
+    // Hero Section
+    'hero.title.line1': 'Uczyńmy Hamburg',
+    'hero.title.line2': 'znów wspaniałym',
+    'hero.subtitle': 'Dołącz do inicjatywy społecznej, aby utrzymać nasze drogi wodne w czystości',
+    'hero.reportButton': 'Zgłoś zanieczyszczenie',
+    'hero.joinButton': 'Dołącz do wydarzenia',
+    'hero.activeSpots': 'Aktywne miejsca',
+    'hero.volunteers': 'Wolontariusze',
+    'hero.wasteCollected': 'Zebrane odpady',
+    
+    // Map View
+    'map.title': 'Mapa zanieczyszczeń',
+    'map.subtitle': 'Kliknij na znaczniki, aby zobaczyć szczegóły i głosować na priorytet sprzątania',
+    'map.reported': 'Zgłoszone',
+    'map.beingCleaned': 'W trakcie sprzątania',
+    'map.cleaned': 'Wyczyszczone',
+    'map.reportedBy': 'Zgłoszone przez',
+    'map.voteToClean': 'Głosuj za sprzątaniem',
+    'map.votes': 'głosy',
+    
+    // Report Form
+    'report.title': 'Zgłoś zanieczyszczenie',
+    'report.subtitle': 'Pomóż nam zidentyfikować obszary wymagające sprzątania',
+    'report.pollutionType': 'Rodzaj zanieczyszczenia',
+    'report.severityLevel': 'Poziom nasilenia',
+    'report.streetAddress': 'Adres ulicy',
+    'report.district': 'Dzielnica',
+    'report.selectDistrict': 'Wybierz dzielnicę',
+    'report.description': 'Opis',
+    'report.descriptionPlaceholder': 'Opisz znalezione zanieczyszczenie...',
+    'report.photo': 'Zdjęcie (Opcjonalne)',
+    'report.uploadPhoto': 'Prześlij zdjęcie',
+    'report.dragDrop': 'lub przeciągnij i upuść',
+    'report.fileTypes': 'PNG, JPG, GIF do 10MB',
+    'report.yourName': 'Twoje imię (Opcjonalne)',
+    'report.anonymousPlaceholder': 'Zostaw puste dla anonimowego zgłoszenia',
+    'report.submitReport': 'Wyślij zgłoszenie',
+    'report.removeImage': 'Usuń obraz',
+    'report.severity.low': 'Niski',
+    'report.severity.medium': 'Średni',
+    'report.severity.high': 'Wysoki',
+    'report.type.plastic': 'Plastik',
+    'report.type.chemical': 'Chemiczny',
+    'report.type.trash': 'Śmieci',
+    'report.type.oil': 'Olej',
+    'report.type.other': 'Inne',
+    
+    // Events
+    'events.title': 'Wydarzenia sprzątania',
+    'events.subtitle': 'Dołącz do naszych wydarzeń społecznych i zrób różnicę',
+    'events.filter.all': 'Wszystkie',
+    'events.filter.upcoming': 'Nadchodzące',
+    'events.filter.completed': 'Zakończone',
+    'events.participants': 'uczestników',
+    'events.impactGoal': 'Cel wpływu',
+    'events.organizedBy': 'Organizowane przez',
+    'events.joinEvent': 'Dołącz do wydarzenia',
+    'events.eventFull': 'Wydarzenie pełne',
+    'events.completed': 'Zakończone',
+    'events.noEvents': 'Nie znaleziono wydarzeń',
+    'events.upcoming': 'nadchodzące',
+    
+    // Leaderboard
+    'leaderboard.title': 'Najlepsi Eko-Wojownicy',
+    'leaderboard.points': 'punkty',
+    'leaderboard.events': 'wydarzenia',
+    'leaderboard.viewAll': 'Zobacz wszystkich {count} wolontariuszy →',
+    
+    // Impact Dashboard
+    'impact.title': 'Wpływ społeczności',
+    'impact.ourImpact': 'Nasz wpływ',
+    'impact.subtitle': 'Razem czynimy Hamburg czystszym, jedno miejsce na raz',
+    'impact.topContributors': 'Najlepsi współtwórcy',
+    'impact.wasteCollected': 'Zebrane odpady',
+    'impact.activeVolunteers': 'Aktywni wolontariusze',
+    'impact.totalEvents': 'Łączne wydarzenia',
+    'impact.activeSpots': 'Aktywne miejsca',
+    'impact.co2Saved': 'Zaoszczędzone CO₂',
+    'impact.growthRate': 'Tempo wzrostu',
+    'impact.monthlyProgress': 'Miesięczny postęp',
+    'impact.cleanupGoal': 'Cel sprzątania',
+    'impact.volunteerTarget': 'Cel wolontariuszy',
+    'impact.areaCoverage': 'Pokrycie obszaru',
+    'impact.complete': 'Ukończone',
+    'impact.achieved': 'Osiągnięte',
+    'impact.covered': 'Pokryte',
+    'impact.environmentalImpact': 'Wpływ środowiskowy',
+    'impact.co2Description': 'Twoje wysiłki pozwoliły zaoszczędzić {amount}kg emisji CO₂ w tym miesiącu',
+    'impact.kgTotal': 'kg łącznie',
+    'impact.thisMonth': 'w tym miesiącu',
+    'impact.equivalentTrees': 'Równowartość 45 drzew',
+    'impact.vsLastMonth': 'vs. poprzedni miesiąc',
+    'impact.cleaned': 'wyczyszczone',
+    
+    // Footer
+    'footer.description': 'Inicjatywa społeczna mająca na celu utrzymanie czystości i piękna dróg wodnych Hamburga.',
+    'footer.quickLinks': 'Szybkie linki',
+    'footer.getInvolved': 'Zaangażuj się',
+    'footer.newsletter': 'Newsletter',
+    'footer.newsletterDescription': 'Bądź na bieżąco z naszymi wydarzeniami sprzątania i raportami wpływu.',
+    'footer.yourEmail': 'Twój email',
+    'footer.subscribe': 'Subskrybuj',
+    'footer.volunteer': 'Zostań wolontariuszem',
+    'footer.donate': 'Przekaż darowiznę',
+    'footer.partner': 'Zostań partnerem',
+    'footer.organize': 'Zorganizuj wydarzenie',
+    'footer.madeWith': 'Stworzone z',
+    'footer.forHackathon': 'dla Hamburg Hackathon 2025',
+    'footer.allRights': 'Wszystkie prawa zastrzeżone.',
+    
+    // Common
+    'common.loading': 'Ładowanie...',
+    'common.error': 'Błąd',
+    'common.success': 'Sukces',
+    'common.cancel': 'Anuluj',
+    'common.save': 'Zapisz',
+    'common.delete': 'Usuń',
+    'common.edit': 'Edytuj',
+    'common.view': 'Zobacz',
+    'common.close': 'Zamknij',
+    'common.next': 'Dalej',
+    'common.previous': 'Poprzedni',
+    'common.kg': 'kg',
+    'common.tons': 't',
   }
 };
 
@@ -294,7 +426,7 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({ childr
   const [language, setLanguage] = useState<Language>(() => {
     // Check localStorage first
     const saved = localStorage.getItem('language');
-    if (saved && (saved === 'en' || saved === 'de')) {
+    if (saved && (saved === 'en' || saved === 'de' || saved === 'pl')) {
       return saved as Language;
     }
     
@@ -302,6 +434,9 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({ childr
     const browserLang = navigator.language.toLowerCase();
     if (browserLang.startsWith('de')) {
       return 'de';
+    }
+    if (browserLang.startsWith('pl')) {
+      return 'pl';
     }
     return 'en';
   });
