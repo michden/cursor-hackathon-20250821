@@ -2,7 +2,7 @@ import React from 'react';
 import { Trash2, Users, Calendar, MapPin, Zap, TrendingUp } from 'lucide-react';
 import { ImpactStats } from '../types';
 import { motion } from 'framer-motion';
-import { useAnimatedNumber } from '../hooks/useAnimatedNumber';
+import { useSimpleAnimatedNumber } from '../hooks/useSimpleAnimatedNumber';
 import AnimatedMetric from './AnimatedMetric';
 import AnimatedProgress from './AnimatedProgress';
 
@@ -75,7 +75,7 @@ const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ stats, detailed = fal
         <div className="grid grid-cols-2 gap-4">
           {impactMetrics.slice(0, 4).map((metric, index) => {
             const Icon = metric.icon;
-            const animated = useAnimatedNumber(metric.value, {
+            const animated = useSimpleAnimatedNumber(metric.value, {
               duration: 2000,
               decimals: metric.decimals || 0,
               delay: 200 + (index * 200),

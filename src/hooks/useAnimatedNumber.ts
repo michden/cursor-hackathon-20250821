@@ -9,7 +9,7 @@ interface UseAnimatedNumberOptions {
   suffix?: string;
   separator?: string;
   easing?: (t: number) => number;
-  startOnMount?: boolean; // Add option to start immediately on mount
+  startOnMount?: boolean;
 }
 
 export const useAnimatedNumber = (
@@ -25,7 +25,7 @@ export const useAnimatedNumber = (
     suffix = '',
     separator = ',',
     easing = easeOutExpo,
-    startOnMount = false, // Default to false for backward compatibility
+    startOnMount = false,
   } = options;
 
   const [displayValue, setDisplayValue] = useState<string>(`${prefix}${startFrom}${suffix}`);
@@ -88,39 +88,24 @@ export const useAnimatedNumber = (
     }
   }, [hasStarted, delay, animationLoop]);
 
-  // Start on mount if specified
+  // Initialize observer
   useEffect(() => {
-    if (startOnMount && !hasStarted) {
-      startAnimation();
-    }
-  }, [startOnMount, startAnimation, hasStarted]);
+    if (!startOnMount) {
+      const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasStarted) {
+            startAnimation();
+            if (observerRef.current) {
+              observerRef.current.unobserve(entry.target);
+            }
+          }
+        });
+      };
 
-  // Set up intersection observer for scroll-triggered animations
-  useEffect(() => {
-    if (startOnMount) return; // Skip observer if starting on mount
-    
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !hasStarted) {
-          startAnimation();
-        }
+      observerRef.current = new IntersectionObserver(handleIntersection, {
+        threshold: 0.1,
+        rootMargin: '50px',
       });
-    };
-
-    observerRef.current = new IntersectionObserver(handleIntersection, {
-      threshold: 0.1,
-    });
-
-    // Check if element is already in view when observer is created
-    if (elementRef.current) {
-      const rect = elementRef.current.getBoundingClientRect();
-      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
-      
-      if (isInViewport) {
-        startAnimation();
-      } else {
-        observerRef.current.observe(elementRef.current);
-      }
     }
 
     return () => {
@@ -134,23 +119,51 @@ export const useAnimatedNumber = (
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [startOnMount, startAnimation, hasStarted]);
+  }, [startOnMount, hasStarted, startAnimation]);
+
+  // Start on mount if specified
+  useEffect(() => {
+    if (startOnMount && !hasStarted) {
+      startAnimation();
+    }
+  }, [startOnMount, hasStarted, startAnimation]);
+
+  // Observe element when ref is set
+  useEffect(() => {
+    if (elementRef.current && observerRef.current && !startOnMount && !hasStarted) {
+      const element = elementRef.current;
+      const rect = element.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (isInViewport) {
+        startAnimation();
+      } else {
+        observerRef.current.observe(element);
+      }
+    }
+  }, [elementRef.current, startOnMount, hasStarted, startAnimation]);
 
   // Ref callback
   const ref = useCallback((element: HTMLElement | null) => {
-    if (element) {
+    if (element && element !== elementRef.current) {
       elementRef.current = element;
       
-      // If not starting on mount, check if element is in view
-      if (!startOnMount && !hasStarted && observerRef.current) {
-        const rect = element.getBoundingClientRect();
-        const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isInViewport) {
-          startAnimation();
-        } else {
-          observerRef.current.observe(element);
-        }
+      // For startOnMount, animation already started
+      if (startOnMount) return;
+      
+      // Check if we should start animation
+      if (!hasStarted) {
+        // Wait for next frame to ensure observer is ready
+        requestAnimationFrame(() => {
+          const rect = element.getBoundingClientRect();
+          const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+          
+          if (isInViewport) {
+            startAnimation();
+          } else if (observerRef.current) {
+            observerRef.current.observe(element);
+          }
+        });
       }
     }
   }, [startOnMount, hasStarted, startAnimation]);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useAnimatedNumber } from '../hooks/useAnimatedNumber';
+import { useSimpleAnimatedNumber } from '../hooks/useSimpleAnimatedNumber';
 import { LucideIcon } from 'lucide-react';
 
 interface AnimatedMetricProps {
@@ -32,7 +32,7 @@ const AnimatedMetric: React.FC<AnimatedMetricProps> = ({
   index = 0,
   showProgress = false,
 }) => {
-  const animated = useAnimatedNumber(value, {
+  const animated = useSimpleAnimatedNumber(value, {
     duration: 2000,
     decimals,
     delay: delay + (index * 200),
