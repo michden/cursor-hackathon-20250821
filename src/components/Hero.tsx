@@ -3,20 +3,25 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Sparkles, Users, MapPin } from 'lucide-react';
 import { useSimpleAnimatedNumber } from '../hooks/useSimpleAnimatedNumber';
 import { useTranslation } from '../contexts/TranslationContext';
+import { useDemoMode } from '../contexts/DemoModeContext';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
+  const { isDemoMode } = useDemoMode();
+  
+  // Enhanced numbers for demo mode
+  const demoMultiplier = isDemoMode ? 2.5 : 1;
   
   // Animated statistics - start on mount since Hero is visible immediately
-  const activeSpots = useSimpleAnimatedNumber(48, { 
+  const activeSpots = useSimpleAnimatedNumber(Math.round(48 * demoMultiplier), { 
     duration: 2000, 
     delay: 500
   });
-  const volunteers = useSimpleAnimatedNumber(234, { 
+  const volunteers = useSimpleAnimatedNumber(Math.round(234 * demoMultiplier), { 
     duration: 2000, 
     delay: 700
   });
-  const wasteCollected = useSimpleAnimatedNumber(3.4, { 
+  const wasteCollected = useSimpleAnimatedNumber(3.4 * demoMultiplier, { 
     duration: 2000, 
     delay: 900, 
     decimals: 1,
@@ -24,8 +29,52 @@ const Hero: React.FC = () => {
   });
 
   return (
-    <div className="relative bg-gradient-to-br from-elbe-blue via-blue-600 to-eco-green dark:from-gray-800 dark:via-blue-900 dark:to-gray-900 overflow-hidden transition-all duration-500">
+    <div className={`relative bg-gradient-to-br from-elbe-blue via-blue-600 to-eco-green dark:from-gray-800 dark:via-blue-900 dark:to-gray-900 overflow-hidden transition-all duration-500 ${
+      isDemoMode ? 'animate-pulse-slow' : ''
+    }`}>
       <div className="absolute inset-0 bg-black opacity-10 dark:opacity-30"></div>
+      
+      {/* Demo mode sparkle effect */}
+      {isDemoMode && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-10 left-10 w-2 h-2 bg-yellow-300 rounded-full"
+            animate={{ 
+              scale: [0, 1, 0],
+              opacity: [0, 1, 0]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              delay: 0
+            }}
+          />
+          <motion.div
+            className="absolute top-32 right-20 w-2 h-2 bg-yellow-300 rounded-full"
+            animate={{ 
+              scale: [0, 1, 0],
+              opacity: [0, 1, 0]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              delay: 0.5
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 left-32 w-2 h-2 bg-yellow-300 rounded-full"
+            animate={{ 
+              scale: [0, 1, 0],
+              opacity: [0, 1, 0]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              delay: 1
+            }}
+          />
+        </div>
+      )}
       
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Waves, MapPin, Calendar, TrendingUp, Plus, Moon, Sun } from 'lucide-react';
+import { Waves, MapPin, Calendar, TrendingUp, Plus, Moon, Sun, Play, Square } from 'lucide-react';
 import { useDarkMode } from '../contexts/DarkModeContext';
 import { useTranslation } from '../contexts/TranslationContext';
+import { useDemoMode } from '../contexts/DemoModeContext';
 import LanguageDropdown from './LanguageDropdown';
 
 interface NavbarProps {
@@ -11,6 +12,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { isDemoMode, toggleDemoMode } = useDemoMode();
   const { t } = useTranslation();
   
   const navItems = [
@@ -48,8 +50,32 @@ const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
               );
             })}
             
+            {/* Demo Mode Toggle */}
+            <button
+              onClick={toggleDemoMode}
+              className={`ml-4 px-3 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center space-x-2 ${
+                isDemoMode
+                  ? 'bg-purple-600 text-white hover:bg-purple-700'
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+              }`}
+              aria-label="Toggle demo mode"
+              title={isDemoMode ? 'Stop Demo Mode' : 'Start Demo Mode'}
+            >
+              {isDemoMode ? (
+                <>
+                  <Square className="h-4 w-4" />
+                  <span>Demo</span>
+                </>
+              ) : (
+                <>
+                  <Play className="h-4 w-4" />
+                  <span>Demo</span>
+                </>
+              )}
+            </button>
+
             {/* Language Dropdown */}
-            <div className="ml-4">
+            <div className="ml-3">
               <LanguageDropdown />
             </div>
             
@@ -68,6 +94,24 @@ const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
           </div>
 
           <div className="flex md:hidden items-center space-x-2">
+            {/* Mobile Demo Mode Toggle */}
+            <button
+              onClick={toggleDemoMode}
+              className={`px-2 py-2 rounded-lg font-semibold text-xs transition-all duration-200 flex items-center space-x-1 ${
+                isDemoMode
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
+              }`}
+              aria-label="Toggle demo mode"
+            >
+              {isDemoMode ? (
+                <Square className="h-3 w-3" />
+              ) : (
+                <Play className="h-3 w-3" />
+              )}
+              <span>Demo</span>
+            </button>
+
             {/* Mobile Language Dropdown */}
             <LanguageDropdown isMobile={true} />
             

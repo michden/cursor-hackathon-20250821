@@ -8,6 +8,9 @@ import EventsList from './components/EventsList';
 import Leaderboard from './components/Leaderboard';
 import ImpactDashboard from './components/ImpactDashboard';
 import Footer from './components/Footer';
+import NotificationToast from './components/NotificationToast';
+import DemoModeIndicator from './components/DemoModeIndicator';
+import GuidedTour from './components/GuidedTour';
 import { mockPollutionSpots, mockCleanupEvents, mockVolunteers, mockImpactStats } from './data/mockData';
 import { PollutionSpot, CleanupEvent } from './types';
 import { useTranslation } from './contexts/TranslationContext';
@@ -85,6 +88,11 @@ function App() {
       </main>
 
       <Footer />
+      
+      {/* Demo Mode Components */}
+      <NotificationToast />
+      <DemoModeIndicator />
+      <GuidedTour />
     </div>
   );
 }
