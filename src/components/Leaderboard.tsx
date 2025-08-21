@@ -3,6 +3,7 @@ import { Trophy, Medal, Award, TrendingUp } from 'lucide-react';
 import { Volunteer } from '../types';
 import { motion } from 'framer-motion';
 import { useSimpleAnimatedNumber } from '../hooks/useSimpleAnimatedNumber';
+import { useTranslation } from '../contexts/TranslationContext';
 
 interface LeaderboardProps {
   volunteers: Volunteer[];
@@ -10,6 +11,7 @@ interface LeaderboardProps {
 }
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ volunteers, showAll = false }) => {
+  const { t } = useTranslation();
   const sortedVolunteers = [...volunteers].sort((a, b) => b.points - a.points);
   const displayVolunteers = showAll ? sortedVolunteers : sortedVolunteers.slice(0, 5);
 
@@ -30,7 +32,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ volunteers, showAll = false }
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-colors duration-200">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Top Eco Warriors</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('leaderboard.title')}</h2>
         <Trophy className="h-8 w-8 text-yellow-500" />
       </div>
 
@@ -70,13 +72,13 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ volunteers, showAll = false }
                   <div className="text-2xl font-bold gradient-text" ref={animatedPoints.ref}>
                     {animatedPoints.displayValue}
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">points</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">{t('leaderboard.points')}</div>
                 </div>
               </div>
 
               <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600 flex items-center justify-between text-sm">
                 <div className="flex items-center space-x-4 text-gray-600 dark:text-gray-400">
-                  <span>📅 {volunteer.eventsJoined} events</span>
+                  <span>📅 {volunteer.eventsJoined} {t('leaderboard.events')}</span>
                   <span>♻️ {volunteer.wasteCollected}kg</span>
                 </div>
                 {volunteer.badges.length > 0 && (
@@ -106,7 +108,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ volunteers, showAll = false }
       {!showAll && volunteers.length > 5 && (
         <div className="mt-4 text-center">
           <button className="text-elbe-blue dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm">
-            View all {volunteers.length} volunteers →
+            {t('leaderboard.viewAll', { count: volunteers.length })}
           </button>
         </div>
       )}

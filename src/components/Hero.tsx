@@ -2,8 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Sparkles, Users, MapPin } from 'lucide-react';
 import { useSimpleAnimatedNumber } from '../hooks/useSimpleAnimatedNumber';
+import { useTranslation } from '../contexts/TranslationContext';
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
+  
   // Animated statistics - start on mount since Hero is visible immediately
   const activeSpots = useSimpleAnimatedNumber(48, { 
     duration: 2000, 
@@ -17,7 +20,7 @@ const Hero: React.FC = () => {
     duration: 2000, 
     delay: 900, 
     decimals: 1,
-    suffix: 't'
+    suffix: t('common.tons')
   });
 
   return (
@@ -60,12 +63,12 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Make Hamburg
-              <span className="block text-yellow-300">Great Again</span>
+              {t('hero.title.line1')}
+              <span className="block text-yellow-300">{t('hero.title.line2')}</span>
             </h1>
             
             <p className="text-xl md:text-2xl mb-8 text-blue-50">
-              Join the community-driven initiative to keep our waterways clean
+              {t('hero.subtitle')}
             </p>
           </motion.div>
 
@@ -76,10 +79,10 @@ const Hero: React.FC = () => {
             className="flex flex-wrap justify-center gap-4 mb-12"
           >
             <button className="bg-white dark:bg-gray-800 text-elbe-blue dark:text-blue-400 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 shadow-xl">
-              Report Pollution
+              {t('hero.reportButton')}
             </button>
             <button className="bg-transparent border-2 border-white dark:border-gray-400 text-white dark:text-gray-200 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white dark:hover:bg-gray-800 hover:text-elbe-blue dark:hover:text-blue-400 transition-all duration-200">
-              Join Event
+              {t('hero.joinButton')}
             </button>
           </motion.div>
 
@@ -94,21 +97,21 @@ const Hero: React.FC = () => {
               <div className="text-3xl font-bold" ref={activeSpots.ref}>
                 {activeSpots.displayValue}
               </div>
-              <div className="text-sm">Active Spots</div>
+              <div className="text-sm">{t('hero.activeSpots')}</div>
             </div>
             <div className="bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-40 backdrop-blur-sm rounded-lg p-4">
               <Users className="h-8 w-8 mx-auto mb-2 text-yellow-300 dark:text-yellow-400" />
               <div className="text-3xl font-bold" ref={volunteers.ref}>
                 {volunteers.displayValue}
               </div>
-              <div className="text-sm">Volunteers</div>
+              <div className="text-sm">{t('hero.volunteers')}</div>
             </div>
             <div className="bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-40 backdrop-blur-sm rounded-lg p-4">
               <Sparkles className="h-8 w-8 mx-auto mb-2 text-yellow-300 dark:text-yellow-400" />
               <div className="text-3xl font-bold" ref={wasteCollected.ref}>
                 {wasteCollected.displayValue}
               </div>
-              <div className="text-sm">Waste Collected</div>
+              <div className="text-sm">{t('hero.wasteCollected')}</div>
             </div>
           </motion.div>
 

@@ -3,6 +3,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { PollutionSpot } from '../types';
 import { AlertCircle, CheckCircle, Clock } from 'lucide-react';
+import { useTranslation } from '../contexts/TranslationContext';
 
 // Fix for default markers in React
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -17,6 +18,7 @@ interface MapViewProps {
 }
 
 const MapView: React.FC<MapViewProps> = ({ pollutionSpots }) => {
+  const { t } = useTranslation();
   const mapRef = useRef<L.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
 
@@ -122,23 +124,23 @@ const MapView: React.FC<MapViewProps> = ({ pollutionSpots }) => {
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-colors duration-200">
           <div className="p-6 bg-gradient-to-r from-elbe-blue to-blue-600 dark:from-blue-800 dark:to-blue-900 text-white">
-            <h2 className="text-2xl font-bold mb-2">Pollution Map</h2>
-            <p className="text-blue-100">Click on markers to see details and vote for cleanup priority</p>
+            <h2 className="text-2xl font-bold mb-2">{t('map.title')}</h2>
+            <p className="text-blue-100">{t('map.subtitle')}</p>
           </div>
 
           <div className="p-4 bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700">
             <div className="flex flex-wrap gap-4 justify-center">
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium dark:text-gray-300">Reported ({stats.reported})</span>
+                <span className="text-sm font-medium dark:text-gray-300">{t('map.reported')} ({stats.reported})</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 bg-yellow-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium dark:text-gray-300">Being Cleaned ({stats.cleaning})</span>
+                <span className="text-sm font-medium dark:text-gray-300">{t('map.beingCleaned')} ({stats.cleaning})</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-                <span className="text-sm font-medium dark:text-gray-300">Cleaned ({stats.cleaned})</span>
+                <span className="text-sm font-medium dark:text-gray-300">{t('map.cleaned')} ({stats.cleaned})</span>
               </div>
             </div>
           </div>

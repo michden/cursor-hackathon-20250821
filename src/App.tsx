@@ -10,8 +10,10 @@ import ImpactDashboard from './components/ImpactDashboard';
 import Footer from './components/Footer';
 import { mockPollutionSpots, mockCleanupEvents, mockVolunteers, mockImpactStats } from './data/mockData';
 import { PollutionSpot, CleanupEvent } from './types';
+import { useTranslation } from './contexts/TranslationContext';
 
 function App() {
+  const { t } = useTranslation();
   const [pollutionSpots, setPollutionSpots] = useState(mockPollutionSpots);
   const [cleanupEvents, setCleanupEvents] = useState(mockCleanupEvents);
   const [activeView, setActiveView] = useState<'map' | 'report' | 'events' | 'impact'>('map');
@@ -70,12 +72,12 @@ function App() {
         {activeView === 'impact' && (
           <div className="container mx-auto px-4 py-12">
             <div className="mb-8">
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Impact</h1>
-              <p className="text-lg text-gray-600 dark:text-gray-400">Together we're making Hamburg cleaner, one spot at a time</p>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t('impact.ourImpact')}</h1>
+              <p className="text-lg text-gray-600 dark:text-gray-400">{t('impact.subtitle')}</p>
             </div>
             <ImpactDashboard stats={mockImpactStats} detailed={true} />
             <div className="mt-12">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Top Contributors</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('impact.topContributors')}</h2>
               <Leaderboard volunteers={mockVolunteers} showAll={true} />
             </div>
           </div>

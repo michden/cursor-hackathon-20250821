@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Calendar, MapPin, Users, Clock, Target } from 'lucide-react';
 import { CleanupEvent } from '../types';
 import { motion } from 'framer-motion';
+import { useTranslation } from '../contexts/TranslationContext';
 
 interface EventsListProps {
   events: CleanupEvent[];
@@ -9,6 +10,7 @@ interface EventsListProps {
 }
 
 const EventsList: React.FC<EventsListProps> = ({ events, onJoinEvent }) => {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'completed'>('all');
 
   const filteredEvents = events.filter(event => {
@@ -30,21 +32,21 @@ const EventsList: React.FC<EventsListProps> = ({ events, onJoinEvent }) => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Cleanup Events</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">Join our community events and make a difference</p>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t('events.title')}</h1>
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">{t('events.subtitle')}</p>
         
         <div className="flex flex-wrap gap-2">
-          {['all', 'upcoming', 'completed'].map((filterType) => (
+          {(['all', 'upcoming', 'completed'] as const).map((filterType) => (
             <button
               key={filterType}
-              onClick={() => setFilter(filterType as any)}
+              onClick={() => setFilter(filterType)}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 filter === filterType
                   ? 'bg-elbe-blue text-white dark:bg-blue-600'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
             >
-              {filterType.charAt(0).toUpperCase() + filterType.slice(1)}
+              {t(`events.filter.${filterType}`)}
             </button>
           ))}
         </div>
@@ -97,14 +99,14 @@ const EventsList: React.FC<EventsListProps> = ({ events, onJoinEvent }) => {
                 </div>
                 <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                   <Users className="h-4 w-4 mr-2 text-elbe-blue" />
-                  {event.participants.length} / {event.maxParticipants} participants
+                                      {event.participants.length} / {event.maxParticipants} {t('events.participants')}
                 </div>
               </div>
 
               <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
                 <div className="flex items-center text-sm font-medium text-elbe-blue dark:text-blue-400">
                   <Target className="h-4 w-4 mr-2" />
-                  Impact Goal
+                  {t('events.impactGoal')}
                 </div>
                 <div className="text-xs text-gray-600 dark:text-gray-500 mt-1">
                   {event.impactGoal.wasteKg}kg waste • {event.impactGoal.area}
@@ -113,7 +115,7 @@ const EventsList: React.FC<EventsListProps> = ({ events, onJoinEvent }) => {
 
               <div className="border-t dark:border-gray-700 pt-4">
                 <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                  Organized by <span className="font-medium">{event.organizer}</span>
+                  {t('events.organizedBy')} <span className="font-medium">{event.organizer}</span>
                 </div>
                 
                 {event.status === 'upcoming' && (
@@ -126,13 +128,13 @@ const EventsList: React.FC<EventsListProps> = ({ events, onJoinEvent }) => {
                         : 'bg-elbe-blue text-white hover:bg-blue-700'
                     }`}
                   >
-                    {event.participants.length >= event.maxParticipants ? 'Event Full' : 'Join Event'}
+                    {event.participants.length >= event.maxParticipants ? t('events.eventFull') : t('events.joinEvent')}
                   </button>
                 )}
                 
                 {event.status === 'completed' && (
                   <div className="text-center text-green-600 font-semibold">
-                    ✅ Completed
+                    ✅ {t('events.completed')}
                   </div>
                 )}
               </div>
@@ -143,7 +145,7 @@ const EventsList: React.FC<EventsListProps> = ({ events, onJoinEvent }) => {
 
       {filteredEvents.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-500 dark:text-gray-400 text-lg">No events found</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg">{t('events.noEvents')}</p>
         </div>
       )}
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Waves, MapPin, Calendar, TrendingUp, Plus, Moon, Sun } from 'lucide-react';
+import { Waves, MapPin, Calendar, TrendingUp, Plus, Moon, Sun, Languages } from 'lucide-react';
 import { useDarkMode } from '../contexts/DarkModeContext';
+import { useTranslation } from '../contexts/TranslationContext';
 
 interface NavbarProps {
   activeView: string;
@@ -9,12 +10,18 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { language, setLanguage, t } = useTranslation();
+  
   const navItems = [
-    { id: 'map', label: 'Map', icon: MapPin },
-    { id: 'report', label: 'Report', icon: Plus },
-    { id: 'events', label: 'Events', icon: Calendar },
-    { id: 'impact', label: 'Impact', icon: TrendingUp },
+    { id: 'map', label: t('nav.map'), icon: MapPin },
+    { id: 'report', label: t('nav.report'), icon: Plus },
+    { id: 'events', label: t('nav.events'), icon: Calendar },
+    { id: 'impact', label: t('nav.impact'), icon: TrendingUp },
   ];
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'de' : 'en');
+  };
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-lg sticky top-0 z-50 transition-colors duration-200">
@@ -44,10 +51,20 @@ const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
               );
             })}
             
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="ml-4 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 font-semibold text-sm min-w-[44px]"
+              aria-label="Toggle language"
+              title={language === 'en' ? 'Switch to German' : 'Switch to English'}
+            >
+              {language.toUpperCase()}
+            </button>
+            
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="ml-4 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200"
+              className="ml-2 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200"
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
@@ -59,6 +76,15 @@ const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
           </div>
 
           <div className="flex md:hidden items-center space-x-2">
+            {/* Mobile Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold text-sm min-w-[40px]"
+              aria-label="Toggle language"
+            >
+              {language.toUpperCase()}
+            </button>
+            
             {/* Mobile Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
