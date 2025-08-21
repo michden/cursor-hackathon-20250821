@@ -1,7 +1,8 @@
 import React from 'react';
-import { Waves, MapPin, Calendar, TrendingUp, Plus, Moon, Sun, Languages } from 'lucide-react';
+import { Waves, MapPin, Calendar, TrendingUp, Plus, Moon, Sun } from 'lucide-react';
 import { useDarkMode } from '../contexts/DarkModeContext';
 import { useTranslation } from '../contexts/TranslationContext';
+import LanguageDropdown from './LanguageDropdown';
 
 interface NavbarProps {
   activeView: string;
@@ -10,7 +11,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-  const { language, setLanguage, t } = useTranslation();
+  const { t } = useTranslation();
   
   const navItems = [
     { id: 'map', label: t('nav.map'), icon: MapPin },
@@ -18,22 +19,6 @@ const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
     { id: 'events', label: t('nav.events'), icon: Calendar },
     { id: 'impact', label: t('nav.impact'), icon: TrendingUp },
   ];
-
-  const toggleLanguage = () => {
-    const languages: Array<'en' | 'de' | 'pl'> = ['en', 'de', 'pl'];
-    const currentIndex = languages.indexOf(language);
-    const nextIndex = (currentIndex + 1) % languages.length;
-    setLanguage(languages[nextIndex]);
-  };
-
-  const getLanguageFlag = (lang: string) => {
-    switch (lang) {
-      case 'en': return '🇬🇧';
-      case 'de': return '🇩🇪';
-      case 'pl': return '🇵🇱';
-      default: return '🌍';
-    }
-  };
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-lg sticky top-0 z-50 transition-colors duration-200">
@@ -63,21 +48,15 @@ const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
               );
             })}
             
-            {/* Language Toggle */}
-            <button
-              onClick={toggleLanguage}
-              className="ml-4 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 font-semibold text-sm min-w-[60px] flex items-center justify-center space-x-1"
-              aria-label="Toggle language"
-              title={`Switch language (${language.toUpperCase()})`}
-            >
-              <span className="text-base">{getLanguageFlag(language)}</span>
-              <span>{language.toUpperCase()}</span>
-            </button>
+            {/* Language Dropdown */}
+            <div className="ml-4">
+              <LanguageDropdown />
+            </div>
             
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="ml-2 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200"
+              className="ml-3 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200"
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
@@ -89,15 +68,8 @@ const Navbar: React.FC<NavbarProps> = ({ activeView, setActiveView }) => {
           </div>
 
           <div className="flex md:hidden items-center space-x-2">
-            {/* Mobile Language Toggle */}
-            <button
-              onClick={toggleLanguage}
-              className="px-2 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold text-sm min-w-[50px] flex items-center justify-center space-x-1"
-              aria-label="Toggle language"
-            >
-              <span className="text-sm">{getLanguageFlag(language)}</span>
-              <span className="text-xs">{language.toUpperCase()}</span>
-            </button>
+            {/* Mobile Language Dropdown */}
+            <LanguageDropdown isMobile={true} />
             
             {/* Mobile Dark Mode Toggle */}
             <button
