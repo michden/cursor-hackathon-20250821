@@ -5,7 +5,7 @@ Thank you for your interest in contributing to ElbeClean! 🌊
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/yourusername/elbe-clean.git`
+2. Clone your fork: `git clone https://github.com/yourusername/cursor-hackathon-20250821.git`
 3. Install dependencies: `npm install`
 4. Start development server: `npm run dev`
 
@@ -34,7 +34,7 @@ Thank you for your interest in contributing to ElbeClean! 🌊
 - 📱 **Mobile UX**: Enhance mobile responsiveness
 - 🎨 **UI/UX**: Design improvements and animations
 - 🧪 **Testing**: Add unit and integration tests
-- 🌐 **Localization**: Add German language support
+- 🌐 **Localization**: Improve existing multilingual support (EN/DE/PL)
 - 📊 **Analytics**: Improve impact tracking and visualization
 
 ## Bug Reports
