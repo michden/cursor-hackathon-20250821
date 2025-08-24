@@ -12,14 +12,14 @@
 ## 🎯 Demo Script (60 seconds)
 
 ### **[0-8 seconds] Opening & Hero**
-*"Welcome to ElbeClean - the community-driven platform that's making Hamburg great again. Our mission is simple: keep Hamburg's beautiful waterways clean through the power of community action."*
+*"Welcome to ElbeClean - making Hamburg's waterways clean through community action."*
 
 **Actions:**
 - Show hero section with animated statistics
 - Let numbers count up (48 active spots, 234 volunteers, 3.4 tons collected)
 
-### **[8-15 seconds] Language & Accessibility**
-*"Built for Hamburg's diverse community, our app supports three languages - English, German, and Polish. Watch as we instantly translate the entire interface."*
+### **[8-15 seconds] Language Support**
+*"Our app supports three languages - English, German, and Polish. Watch as we instantly translate the interface."*
 
 **Actions:**
 - Click language dropdown (🇬🇧 EN)
@@ -27,8 +27,8 @@
 - Select Polish (🇵🇱 PL) - show full Polish interface
 - Return to English (🇬🇧 EN)
 
-### **[15-25 seconds] Interactive Features**
-*"Users can easily report pollution with our intuitive interface, browse and join community cleanup events, and track their environmental impact through our gamified leaderboard system."*
+### **[15-25 seconds] Core Features**
+*"Users can report pollution, join cleanup events, and track their impact through our gamified leaderboard."*
 
 **Actions:**
 - Scroll down to show the map
@@ -37,8 +37,8 @@
 - Click "Events" to show cleanup events
 - Scroll to show leaderboard with animated points
 
-### **[25-35 seconds] Demo Mode Activation**
-*"Now let me activate our presentation demo mode to show you the real-time community engagement."*
+### **[25-35 seconds] Demo Mode**
+*"Let me activate demo mode to show real-time community engagement."*
 
 **Actions:**
 - Click the purple "Demo" button in navbar
@@ -46,8 +46,8 @@
 - Watch live notifications start appearing (top-right)
 - Point out the enhanced statistics
 
-### **[35-45 seconds] Live Activity Simulation**
-*"In demo mode, you can see live notifications as community members report pollution, join events, and earn achievements. This simulates the real-time engagement we expect from Hamburg's environmental community."*
+### **[35-45 seconds] Live Activity**
+*"In demo mode, you see live notifications as members report pollution, join events, and earn achievements."*
 
 **Actions:**
 - Let notifications continue appearing
@@ -55,16 +55,16 @@
 - Show dark mode toggle working with demo mode
 - Highlight the professional UI
 
-### **[45-55 seconds] Impact & Vision**
-*"Our impact dashboard shows real environmental results - and in demo mode, you can see how these numbers could grow with wider adoption. This isn't just an app - it's a movement to make Hamburg's waterways the cleanest in Europe."*
+### **[45-55 seconds] Impact**
+*"Our impact dashboard shows real results. This isn't just an app - it's a movement to make Hamburg's waterways the cleanest in Europe."*
 
 **Actions:**
 - Navigate to Impact section
 - Show animated metrics and progress bars
 - Highlight the CO₂ savings and community growth
 
-### **[55-60 seconds] Call to Action**
-*"ElbeClean - where technology meets environmental action. Ready to make Hamburg great again, one cleanup at a time."*
+### **[55-60 seconds] Closing**
+*"ElbeClean - where technology meets environmental action. Making Hamburg great again, one cleanup at a time."*
 
 **Actions:**
 - Return to hero section
